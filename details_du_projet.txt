@@ -1,0 +1,115 @@
+C:\xampp\htdocs\median\DEMO>composer init
+-pour generer l'autoloader taper:
+ composer dump-autoload
+
+TESTER LE CODE(install phpunit explorer sur vs code ) 
+composer require --dev phpunit/phpunit ^8. 
+
+install une version psr7 pour gerer les requettes http
+composer require guzzlehttp/psr7
+
+A function to convert PSR-7 Response to HTTP output(convertir un objet de l'interface prs7 en htpp pour l'afficher a l'ecran)
+composer require http-interop/response-sender
+
+Install CODE_SNIFFER pour optimiser(trouver des erreurs) votre code 
+global:  composer global require "squizlabs/php_codesniffer=*"
+Local :  composer require "squizlabs/php_codesniffer=*"
+Ex:
+ C:\xampp\htdocs\median\PROJET_BLOG_POO>
+detecter les erreurs: .\vendor\bin\phpcs --standard=PSR2 --colors src\Framework\App.php
+corriger les erreurs automatiquement: .\vendor\bin\phpcbf --standard=PSR2 src\Framework\App.php
+
+install un fastRoute
+ composer require mezzio/mezzio-fastroute
+
+ install le moteur template twig
+ composer require twig/twig
+
+ install le conteneur injection de dependance php-di/php-di
+ composer require php-di/php-di
+
+install phinx pour la migration de la base de donne
+ composer require --dev robmorgan/phinx
+C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx init
+
+tester la migration
+ C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx migrate
+
+ creer un table
+ C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx create CreatePostsTable
+
+creer un seeder
+C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx seed:create PostSeeder
+
+execute le seeder
+C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx seed:run
+
+ install faker pour tester avec de faut donne
+ C:\xampp\htdocs\median\PROJET_BLOG_POO>composer require fakerphp/faker
+
+ install pagerfanta pour gerer la pagination des articles
+ composer require pagerfanta/pagerfanta
+
+ utiliser timeago pour les dates
+ recherche google "timeago"
+ https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js
+
+ Lancer phpunit pour corriger les eventuels erreurs
+ C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phpunit
+
+ corriger un fichier test particulier
+ C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phpunit --colors tests\Framework\Session\FlashServiceTest.php
+ 
+ utiliser flatpicker pour gerer la date de creation
+ aller cdnjs rechercher 'flatpicker' puis copier les deux ci-dessous
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js" integrity="sha512-K/oyQtMXpxI4+K0W7H25UopjM8pzq0yrVdFdG21Fh5dBe91I40pDd9A4lzNlHPHBIP2cwZuoxaUSX0GJSObvGA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+ creer la migration pour la date Category
+ C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx create AddCategoryTable
+
+  apres l'edition du fichier faire la migration
+  C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx migrate
+
+  creer une migration pour lier category et Post
+  C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx create AddCategoryIdToPost
+
+  pour reseeder i-e effacer tout les donnees que vous a enregistrer avant
+  pour faire un mise a jour on procede comme suit:
+  1e) On fait un rollback pour supprimer tout les donnees
+    C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx rollback -t 0
+  
+  2e) On fait un migrate pour re-creer les tables
+    C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx migrate
+
+  2e) On fait un seed pour re-ajouter les donnees  
+      C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx seed:run
+
+Install Whoops pour afficher les eventuels erreurs de facon detaille 
+1e) C:\xampp\htdocs\median\PROJET_BLOG_POO>composer require middlewares/whoops
+2e) faire la classe App implements RequestHandlerInterface
+3e) ajout cette methode: 
+public function handle(ServerRequestInterface $request): ResponseInterface
+    {
+        return $this->process($request);
+    } 
+
+add un champ pour image
+C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx create AddImageToPost
+C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx migrate
+
+telecharder intervention image pour bien formats les images
+  C:\xampp\htdocs\median\PROJET_BLOG_POO>composer require intervention/image
+  activer extionsion=gd dans le fichier php.ini
+
+partir identification(security) 
+C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx create createUsersTable
+Apres edition
+C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx migrate
+Ajout un admin
+C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx seed:create UserSeeder
+apres edition
+C:\xampp\htdocs\median\PROJET_BLOG_POO>vendor\bin\phinx seed:run
+
+
+(RoutePrefixedMiddleware,LoggedInMiddleware, ForbiddenMiddleware modifier les methodes process en handle pour adapter avec RequestHandlerInterface)

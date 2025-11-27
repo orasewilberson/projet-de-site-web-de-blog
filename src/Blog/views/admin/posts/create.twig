@@ -1,0 +1,13 @@
+{% extends '@admin/layout.twig' %}
+
+{% block title "Enregistrer un article" %}
+
+{% block body %}
+
+<form action="{{ path(routePrefix ~ '.create') }}" method="post" enctype="multipart/form-data">
+    
+    {% include viewPath ~ '/form.twig' %}
+    
+    <button class="btn btn-primary" type="submit">Ajouter</button>
+</form>
+{% endblock %}
